@@ -1,0 +1,155 @@
+﻿#include <iostream>
+#include "time.h"
+#include <string>
+#include "windows.h"
+using namespace std;
+
+class Software {
+private:
+	string name;
+	string developer;
+	string data;
+public:
+	string getName() { return name; }
+	string getDeveloper() { return developer; }
+	string getData() { return data; }
+	void setName(string name1) { name = name1; }
+	void setDeveloper(string developer1) { developer = developer1; }
+	void setData(string data1) { data = data1; }
+	void display() {
+		if (name == "") { throw 1; }
+		else cout << "Name: " << name << endl;
+		if (developer == "") { throw 2; }
+		else cout << "Developer: " << developer << endl;
+		if (data == "") {
+			throw 3;
+		}
+		else cout << "Data of run-out: " << data << endl;
+	}
+
+};
+
+class Basic : public Software {
+private:
+	string lastV;
+public:
+
+	string getLast() { return lastV; }
+	void setLast(string last1) { lastV = last1; }
+
+	void dB() {
+		cout << "Last version: " << lastV << endl;
+	}
+};
+
+
+class Applications {
+private:
+	string area;
+	string type;
+public:
+	string getArea() { return area; };
+	void setArea(string area1) { area = area1; };
+	string getType() { return type; };
+	void setType(string type1) { type = type1; };
+	void dApp() {
+		
+		if (area == "") { throw 5; }
+		else cout << "Implementation areas: " << area << endl;
+		if (type=="") { throw 6; }
+			else cout << "Type of launch: " << type << endl;
+	}
+};
+
+class SWTool : public Software {
+private:
+	string systype;
+	string exetype;
+public:
+	string getSystype() { return systype; };
+	void setSystype(string systype1) { systype = systype1; };
+	string getExetype() { return exetype; };
+	void setExetype(string exetype1) { exetype = exetype1; };
+	void dSW() {
+		cout << "System type: " << systype << endl;
+		cout << "Type of execute: " << exetype << endl;
+	}
+};
+
+class SpesialAssignment : public Applications, public Software {// специальное назначение
+private:
+	string SALastV;
+	string SARenewal;
+	string SASpace;
+
+public:
+	string getSALastV() { return SALastV; };
+	void setSALastV(string SALastV1) { SALastV = SALastV1; };
+	string getSARenewal() { return SARenewal; };
+	void setSARenewal(string SARenewal1) { SARenewal = SARenewal1; };
+	string getSASpace() { return SASpace; };
+	void setSASpace(string SASpace1) { SASpace = SASpace1; };
+	void dSA() {
+		if (SALastV == "") {throw 8; }
+		else cout << "Last version: " << SALastV << endl;
+		if (SARenewal == "") { throw 9; }
+		else cout << "Data of last renewal: " << SARenewal << endl;
+		if (SASpace == "") { throw 10; }
+		else cout << "Space of using: " << SASpace << endl;
+	}
+
+};
+
+
+int main()
+{
+	setlocale(LC_ALL, "ru");
+	Basic basic;
+	basic.setName("Windows");
+	basic.setDeveloper("Windows");
+	basic.setData("20 November 1985");
+	basic.display();
+	basic.setLast("10.0.18363.592");
+	basic.dB();
+	cout << endl;
+	int n = 0;
+	try {
+		SpesialAssignment SA;
+		SA.setName("Photoshop");
+		SA.setDeveloper("Adobe");
+		SA.setData("19.02.1990");
+		SA.display();
+		SA.setArea("design");
+		SA.setType("downloading");
+		SA.dApp();
+		SA.setSALastV("CC20");
+		SA.setSARenewal("19 May 2020");
+		SA.setSASpace("Web-design");
+		SA.dSA();
+		cout << endl;
+	}
+	catch (int i)
+	{
+		if (i == 1) cout << "Не указано название." << endl;
+		if (i == 2) cout << "Не указан разработчик." << endl;
+		if (i == 3) cout << "Не указана дата создания." << endl;
+		if (i == 5) cout << "Не указана сфера использования." << endl;
+		if (i == 6) cout << "Не указан тип установки." << endl;
+		if (i == 8) cout << "Не указано название последней версии." << endl;
+		if (i == 9) cout << "Не указана дата последнего обновления." << endl;
+		if (i == 10) cout << "Не указана направление использования." << endl;
+	}
+
+	SWTool sw;
+	sw.setName("C++");
+	sw.setDeveloper("Bjarne Stroustrup");
+	sw.setData("1983");
+	sw.display();
+	sw.setSystype("static");
+	sw.setExetype("compilable");
+	sw.dSW();
+
+	system("pause");
+	return 0;
+}
+
